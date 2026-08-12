@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 // =========================================================
-// VERSIÓN "MALA" - PARA VER EL ERROR DE COMPILACIÓN
+// VERSIÓN "incorrecta" 
 // =========================================================
-// A propósito, calcularArea() NO está declarado acá.
+// calcularArea() no está declarado acá.
 // Cada subclase lo define por su cuenta, sin ningún vínculo
-// formal con la clase base.
+// con la clase base.
 class ElementoGrafico {
     protected int x;
     protected int y;
@@ -26,11 +26,11 @@ class ElementoGrafico {
         this.color = nuevoColor;
     }
 
-    // <-- OJO: acá NO hay calcularArea(). Ese es el problema.
+    //no hay calcularArea().
 }
 
 // =========================================================
-// SUBCLASES CONCRETAS
+// SUBCLASES
 // =========================================================
 class Rectangulo extends ElementoGrafico {
     protected double base;
@@ -42,7 +42,7 @@ class Rectangulo extends ElementoGrafico {
         this.altura = altura;
     }
 
-    // calcularArea() existe SOLO acá, en Rectangulo.
+    // calcularArea() solo existe acá, en Rectangulo.
     // Java no sabe nada de esto cuando trabaja con el tipo ElementoGrafico.
     public double calcularArea() {
         return base * altura;
@@ -59,7 +59,7 @@ class Elipse extends ElementoGrafico {
         this.semiEjeMenor = semiEjeMenor;
     }
 
-    // calcularArea() existe SOLO acá, en Elipse.
+    // calcularArea() solo existe acá, en Elipse.
     public double calcularArea() {
         return Math.PI * semiEjeMayor * semiEjeMenor;
     }
@@ -84,9 +84,9 @@ class Lienzo {
 
             // *** ACÁ ESTÁ EL ERROR DE COMPILACIÓN ***
             // "elemento" es de tipo ElementoGrafico, y esa clase
-            // NO tiene un método calcularArea(). No importa que el
+            // no tiene un método calcularArea(). No importa que el
             // objeto real adentro sea un Rectangulo o una Elipse:
-            // el compilador solo mira el TIPO DECLARADO de la variable.
+            // el compilador solo mira el tipo declarado de la variable.
             areaTotal += elemento.calcularArea();
         }
 
@@ -97,7 +97,7 @@ class Lienzo {
 // =========================================================
 // PROGRAMA PRINCIPAL
 // =========================================================
-public class MainConError {
+public class tp5_ej4_version2 {
     public static void main(String[] args) {
         Lienzo lienzo = new Lienzo();
 
