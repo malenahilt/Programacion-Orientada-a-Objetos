@@ -5,7 +5,7 @@ import java.util.ArrayList;
 // =========================================================
 // Es abstracta porque no tiene sentido crear un "ElementoGrafico"
 // genérico: solo existen Rectángulos, Elipses, etc. Pero sí define
-// el CONTRATO común que todos los elementos deben cumplir.
+// el contrato común que todos los elementos deben cumplir.
 abstract class ElementoGrafico {
     protected int x;
     protected int y;
@@ -17,7 +17,7 @@ abstract class ElementoGrafico {
         this.color = color;
     }
 
-    // Comportamiento común -> NO hace falta que cada subclase lo reimplemente
+    // Comportamiento común -> no hace falta que cada subclase lo reimplemente
     public void moverA(int nuevoX, int nuevoY) {
         this.x = nuevoX;
         this.y = nuevoY;
@@ -27,10 +27,9 @@ abstract class ElementoGrafico {
         this.color = nuevoColor;
     }
 
-    // *** LA CLAVE DEL EJERCICIO ***
-    // Método abstracto: obliga a CADA subclase a implementarlo,
+    // Método abstracto: obliga a cada subclase a implementarlo,
     // pero además queda "registrado" en el contrato de ElementoGrafico.
-    // Gracias a esto, el compilador SÍ sabe que cualquier variable
+    // Gracias a esto, el compilador si sabe que cualquier variable
     // de tipo ElementoGrafico tiene un calcularArea() válido.
     public abstract double calcularArea();
 
@@ -42,7 +41,7 @@ abstract class ElementoGrafico {
 }
 
 // =========================================================
-// SUBCLASES CONCRETAS
+// SUBCLASES
 // =========================================================
 class Rectangulo extends ElementoGrafico {
     protected double base;
@@ -60,7 +59,7 @@ class Rectangulo extends ElementoGrafico {
     }
 }
 
-// Un Cuadrado ES-UN Rectángulo con base == altura (reutilizamos código)
+// Un Cuadrado es-un Rectángulo con base == altura (reutilizamos código)
 class Cuadrado extends Rectangulo {
     public Cuadrado(int x, int y, String color, double lado) {
         super(x, y, color, lado, lado);
@@ -83,7 +82,7 @@ class Elipse extends ElementoGrafico {
     }
 }
 
-// Un Círculo ES-UNA Elipse con ambos semiejes iguales (el radio)
+// Un Círculo es-una Elipse con ambos semiejes iguales (el radio)
 class Circulo extends Elipse {
     public Circulo(int x, int y, String color, double radio) {
         super(x, y, color, radio, radio);
@@ -108,14 +107,14 @@ class Lienzo {
     }
 
     // El "motor" recorre todo sin saber (ni necesitar saber) de qué
-    // figura concreta se trata. Eso es lo elegante del polimorfismo.
+    // figura concreta se trata.
     public void renderizar() {
         double areaTotal = 0;
 
         for (ElementoGrafico elemento : elementos) {
             elemento.cambiarColor("#808080");   // filtro escala de grises
             elemento.moverA(0, 0);              // mover al origen
-            areaTotal += elemento.calcularArea(); // esto SÍ compila (ver explicación)
+            areaTotal += elemento.calcularArea();
         }
 
         System.out.println("Área total ocupada: " + areaTotal + " píxeles");
